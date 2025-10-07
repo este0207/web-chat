@@ -1,7 +1,16 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Links from "./Links";
 import Link from "next/link"; 
 
 export default function NavBar() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(true);
+  }, []);
+
   const navLinks = [
       { label: "FAQ", href: "/faq" },
       { label: "À propos", href: "/about" },
@@ -9,7 +18,10 @@ export default function NavBar() {
   ];
 
   return (
-    <nav className="w-full p-4 bg-gray-800 text-white flex items-center justify-between px-8">
+    <nav
+      className={`w-full-10 p-4 bg-white/10 backdrop-blur-md text-white flex items-center justify-between px-8 m-8 rounded-full transition-all duration-700 ease-out
+        ${visible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"}`}
+    >
       <Link href="/" className="text-2xl font-bold">Home</Link>
       <ul className="flex space-x-4 float-right ml-4">
         <Links links={navLinks} />
